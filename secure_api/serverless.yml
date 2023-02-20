@@ -1,0 +1,35 @@
+service: secure-api
+provider:
+  name: aws
+  runtime: python3.8
+  apiGateway:
+    shouldStartNameWithService: true
+    minimumCompressionSize: 1024
+    binaryMediaTypes:
+      - '*/*'
+    domain:
+      name: demotest.com
+      certificateArn: arn:aws:acm:us-east-1:152214817392:certificate/874b3eac-53b7-4727-809c-68ed13f5b60ff5b60f
+    endpointType: REGIONAL
+    httpApi:
+      cors:
+        allowCredentials: true
+        allowHeaders:
+          - '*'
+        allowMethods:
+          - '*'
+        allowOrigins:
+          - '*'
+      defaultRouteSettings:
+        detailedMetricsEnabled: true
+        loggingLevel: INFO
+        throttlingBurstLimit: 500
+        throttlingRateLimit: 1000
+        dataTraceEnabled: true
+      shouldEncrypt: true
+      minimumCompressionSize: 1024
+      protocols:
+        - HTTPS
+        - HTTP
+      securityPolicy: TLS_1_2
+
